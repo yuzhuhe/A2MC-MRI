@@ -1,62 +1,73 @@
 # A²MC-MRI: Anatomy-Aware Deep Unrolling for Task-Oriented Acceleration of Multi-Contrast MRI
 
-## 🔍 Description
-
-**A²MC-MRI** is an anatomy-aware, unrolling-based deep network designed for accelerated multi-contrast MRI (MC-MRI) reconstruction. Unlike traditional methods that prioritize overall image quality, A²MC-MRI is a **task-oriented** framework that focuses on enhancing specific **Targets of Interest (TOIs)**—such as subcortical regions or lesions—to better serve downstream clinical needs[cite: 11, 49].
-
-The framework uniquely integrates:
-* [cite_start]**Learnable Group Sparsity**: Captures intrinsic correlations across different contrasts (e.g., T1, T2, FLAIR) in a high-dimensional semantic space[cite: 13, 51].
-* [cite_start]**Anatomy-Aware Denoising Prior**: Utilizes a segmentation network (**P-net**) to provide critical location information, enabling specialized denoising for TOIs[cite: 14, 52].
-* [cite_start]**Joint Learning**: The unrolled network is trained in tandem with learnable k-space sampling patterns to optimize imaging for specific clinical tasks[cite: 15, 53].
+## 🔍 Abstract
+[cite_start]Multi-contrast magnetic resonance imaging (MC-MRI) is crucial in clinical practice but is often hindered by long scanning times and the isolation between image acquisition and downstream clinical needs[cite: 7, 8]. [cite_start]We propose an anatomy-aware unrolling-based deep network, dubbed **A²MC-MRI**, offering promising interpretability and learning capacity for fast MC-MRI[cite: 11]. [cite_start]By integrating learnable group sparsity with an anatomy-aware denoising prior, the model enhances concurrent MC-MRI of specific targets of interest (TOIs)[cite: 13]. [cite_start]Comprehensive evaluations demonstrate state-of-the-art performance in reconstruction under high acceleration rates, featuring notable enhancements in TOI imaging quality[cite: 16].
 
 ---
 
 ## 🧭 Framework Overview
+[cite_start]The A²MC-MRI network consists of $T=6$ cascaded stages, each containing three pivotal modules[cite: 196, 260]:
 
-[cite_start]The A²MC-MRI network consists of $T=6$ cascaded stages[cite: 196, 260]. Each stage contains three pivotal modules:
-1. [cite_start]**Denoising Module ($D_w$)**: A lightweight U-Net that produces artifact-free images $Z^{(n)}$ from the previous stage output[cite: 202, 204].
-2. [cite_start]**Anatomy-Aware Data-Consistency Module ($A^2\mathcal{DC}$)**: Incorporates the pre-trained **P-net** to identify TOIs and applies refined constraints on the discrepancy between the reconstructed and denoised images[cite: 202, 210, 216].
-3. [cite_start]**Group Sparsity Module (GS)**: Enhances cross-contrast information fusion using $l_{2,1}$-norm-based sparsity in the feature domain[cite: 202, 218, 222].
-
-![A2MC-MRI Architecture](assets/framework.png)
+1. [cite_start]**Denoising Module ($D_w$)**: Utilizes a lightweight U-Net architecture to produce images free of alias and artifacts[cite: 204].
+2. [cite_start]**Anatomy-Aware Data-Consistency Module ($A^2\mathcal{DC}$)**: Refines the data-consistency estimation by incorporating a pre-trained segmentation network (**P-net**) to localize TOIs via probability maps[cite: 212, 216].
+3. [cite_start]**Group Sparsity Module (GS)**: Employs $l_{2,1}$-norm-based group sparsity in a high-dimensional semantic space to fuse complementary information across various contrasts[cite: 222, 227].
 
 ---
 
 ## 📦 Requirements & Dependencies
-
 * [cite_start]**OS**: Ubuntu 20.04 [cite: 259]
-* **GPU**: NVIDIA RTX 3090Ti [cite: 259]
-* **Environment**: Python 3.10+, PyTorch 2.6.0+
-* **Key Libraries**: `monai`, `nibabel`, `numpy`, `scipy`, `einops`
+* [cite_start]**GPU**: NVIDIA RTX 3090Ti [cite: 259]
+* [cite_start]**Environment**: Python, PyTorch [cite: 259, 261]
+* **Key Libraries**: `numpy`, `scipy`, `monai`, `nibabel`, `einops`, `transformers`
 
 ---
 
-## 🗂 Data Preparation & Preprocessing
+## 🗂 Datasets & TOI Definitions
+[cite_start]The model was evaluated on three datasets under high acceleration ratios (8x and 10x)[cite: 239, 258]:
 
-The model has been evaluated on three datasets with high acceleration rates (8x and 10x)[cite: 54, 239]:
-
-| Dataset | Contrasts | Target of Interest (TOI) | System |
-| :--- | :--- | :--- | :--- |
-| **M4Raw** | T1WI, T2WI, FLAIR | Brain subcortical regions [cite: 244] | 0.3T [cite: 241] |
-| **fastMRI** | PDWI, FS-PDWI | Knee lesion / meniscus regions [cite: 249] | 1.5/3.0T [cite: 246] |
-| **In-house** | T1WI, T2WI, FLAIR | Whole brain tissue [cite: 252] | 3.0T [cite: 250] |
-
-### Preprocessing Workflow:
-1. **Undersampling**: Original k-space data is undersampled using learnable or fixed masks[cite: 253].
-2. **Sensitivity Maps**: Multi-coil data uses maps pre-estimated via the **ESPIRIT** algorithm[cite: 256].
-3. **Normalization**: Ground-truth images are reconstructed using 2D Inverse Fourier Transform for individual or combined coils[cite: 254, 255].
+| Dataset | Contrasts | Target of Interest (TOI) |
+| :--- | :--- | :--- |
+| **M4Raw** | T1WI, T2WI, FLAIR | [cite_start]Brain subcortical regions [cite: 242, 244] |
+| **fastMRI** | PDWI, FS-PDWI | [cite_start]Knee lesion / meniscus regions [cite: 246, 249] |
+| **In-house** | T1WI, T2WI, FLAIR | [cite_start]Whole brain tissue [cite: 250, 252] |
 
 ---
 
-## 🚀 Training & Usage
-
+## 🚀 Training & Optimization
 ### Loss Function
-The network is trained using a composite loss function[cite: 232]:
+[cite_start]The network is trained using a composite loss function[cite: 232, 233]:
 $$\mathcal{L}(\Theta) = \mathcal{L}_{consistency} + \alpha\mathcal{L}_{constraint} + \beta\mathcal{L}_{anatomy} + \gamma\mathcal{L}_{dice}$$
-* [cite_start]**$\mathcal{L}_{consistency}$**: Global image fidelity[cite: 233].
-* **$\mathcal{L}_{anatomy}$**: Refinement specifically within the TOIs[cite: 234].
-* **$\mathcal{L}_{dice}$**: Promotes accurate segmentation of TOIs in reconstructed images[cite: 235].
+* [cite_start]**$\mathcal{L}_{consistency}$**: Global fidelity to ground-truth[cite: 233].
+* [cite_start]**$\mathcal{L}_{constraint}$**: Ensures the inverse transform constraint[cite: 234].
+* [cite_start]**$\mathcal{L}_{anatomy}$**: Refines reconstruction specifically within TOIs[cite: 234].
+* [cite_start]**$\mathcal{L}_{dice}$**: Promotes accurate segmentation within the reconstructed images[cite: 235].
 
-### Training Script
-```bash
-python train.py --dataset M4Raw --stages 6 --batch_size 4 --lr 1e-4 --accel 10
+### Hyperparameters
+* [cite_start]**Epochs**: 100 [cite: 261]
+* [cite_start]**Batch Size**: 4 [cite: 261]
+* [cite_start]**Learning Rate**: $1 \times 10^{-4}$ (Adam optimizer) [cite: 261]
+* [cite_start]**Stages ($T$)**: 6 [cite: 260]
+
+---
+
+## 📊 Experimental Results
+* [cite_start]**State-of-the-Art**: A²MC-MRI consistently surpasses competing methods like MT-Trans and MC-J-MoDL in PSNR and SSIM[cite: 311].
+* [cite_start]**TOI Improvement**: Achieved a **1.16 dB** TOI-PSNR improvement for T2WI reconstruction on the M4Raw dataset (10x) compared to MC-J-MoDL[cite: 346].
+* [cite_start]**Efficiency**: Moderate parameter count (6.71M) with high efficacy compared to purely data-driven models[cite: 449, 455].
+
+---
+
+## 🔗 Citation
+If you use this code or method in your research, please cite the following paper:
+
+```bibtex
+@article{he2024anatomy,
+  title={Anatomy-Aware Deep Unrolling for Task-Oriented Acceleration of Multi-Contrast MRI},
+  author={He, Yuzhu and Lian, Chunfeng and Xiao, Ruyi and Ju, Fangmao and Zou, Chao and Wang, Fan and Xu, Zongben and Ma, Jianhua},
+  journal={IEEE Transactions on Medical Imaging},
+  volume={XX},
+  number={XX},
+  pages={XXXX--XXXX},
+  year={2024},
+  publisher={IEEE}
+}
