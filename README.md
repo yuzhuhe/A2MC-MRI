@@ -59,15 +59,16 @@ $$\mathcal{L}(\Theta) = \mathcal{L}_{consistency} + \alpha\mathcal{L}_{constrain
 
 ## 🔗 Citation
 If you use this code or method in your research, please cite the following paper:
-
+**Paper:** [Anatomy-Aware Deep Unrolling for Task-Oriented Acceleration of Multi-Contrast MRI](https://ieeexplore.ieee.org/document/10994324)
+**Code:** [https://github.com/ladderlab-xjtu/A2MC-MRI](https://github.com/ladderlab-xjtu/A2MC-MRI)
 ```bibtex
-@article{he2024anatomy,
-  title={Anatomy-Aware Deep Unrolling for Task-Oriented Acceleration of Multi-Contrast MRI},
-  author={He, Yuzhu and Lian, Chunfeng and Xiao, Ruyi and Ju, Fangmao and Zou, Chao and Wang, Fan and Xu, Zongben and Ma, Jianhua},
-  journal={IEEE Transactions on Medical Imaging},
-  volume={XX},
-  number={XX},
-  pages={XXXX--XXXX},
-  year={2024},
-  publisher={IEEE}
-}
+@ARTICLE{10994324,
+  author={He, Yuzhu and Lian, Chunfeng and Xiao, Ruyi and Ju, Fangmao and Zou, Chao and Xu, Zongben and Ma, Jianhua},
+  journal={IEEE Transactions on Medical Imaging}, 
+  title={Anatomy-Aware Deep Unrolling for Task-Oriented Acceleration of Multi-Contrast MRI}, 
+  year={2025},
+  volume={44},
+  number={9},
+  pages={3832-3844},
+  keywords={Image reconstruction;Imaging;Magnetic resonance imaging;Image segmentation;Image quality;Noise reduction;Trajectory optimization;Training;Protocols;Pathology;MRI;multi-contrast;image reconstruction;task-oriented imaging;model-based deep learning},
+  doi={10.1109/TMI.2025.3568157}}
