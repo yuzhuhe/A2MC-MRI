@@ -54,13 +54,6 @@ The framework was evaluated on three major datasets under high acceleration rati
 
 
 ## 🚀 Training & Usage
-
-### Loss Function
-The network is trained using a composite loss function:
-* **$\mathcal{L}_{consistency}$**: Global fidelity between output and ground-truth.
-* **$\mathcal{L}_{anatomy}$**: Refinement emphasizing fidelity within specified TOIs.
-* **$\mathcal{L}_{dice}$**: Promotes accurate segmentation of TOIs in reconstructed images.
-
 ### Training Details
 * **Optimizer**: Adam
 * **Learning Rate**: $1 \times 10^{-4}$
