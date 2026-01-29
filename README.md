@@ -49,7 +49,7 @@ The framework was evaluated on three major datasets under high acceleration rati
 
 ### Loss Function
 The network is trained using a composite loss function to balance reconstruction fidelity and segmentation accuracy:
-\mathcal{L}(\Theta) = \mathcal{L}_{consistency} + \alpha\mathcal{L}_{constraint} + \beta\mathcal{L}_{anatomy} + \gamma\mathcal{L}_{dice}
+$\mathcal{L}(\Theta)$
 
 ### Training Details
 * **Optimizer**: Adam
