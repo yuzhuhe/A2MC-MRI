@@ -2,7 +2,7 @@
 
 ## 🔍 Description
 
-[cite_start]**A²MC-MRI** is an anatomy-aware, unrolling-based deep network designed for accelerated multi-contrast MRI (MC-MRI) reconstruction[cite: 11]. [cite_start]Unlike traditional methods that prioritize overall image quality, A²MC-MRI is a **task-oriented** framework that focuses on enhancing specific **Targets of Interest (TOIs)**—such as subcortical regions or lesions—to better serve downstream clinical needs[cite: 11, 49].
+**A²MC-MRI** is an anatomy-aware, unrolling-based deep network designed for accelerated multi-contrast MRI (MC-MRI) reconstruction. Unlike traditional methods that prioritize overall image quality, A²MC-MRI is a **task-oriented** framework that focuses on enhancing specific **Targets of Interest (TOIs)**—such as subcortical regions or lesions—to better serve downstream clinical needs[cite: 11, 49].
 
 The framework uniquely integrates:
 * [cite_start]**Learnable Group Sparsity**: Captures intrinsic correlations across different contrasts (e.g., T1, T2, FLAIR) in a high-dimensional semantic space[cite: 13, 51].
