@@ -57,9 +57,6 @@ $$\mathcal{L}(\Theta) = \mathcal{L}_{consistency} + \alpha\mathcal{L}_{constrain
 * **Batch Size**: 4
 * **Stages ($T$)**: 6
 
-```bash
-python train.py --dataset M4Raw --stages 6 --batch_size 4 --lr 1e-4 --accel 10
-
 ## 🔗 Citation
 If you use this code or method in your research, please cite the following paper:
 
