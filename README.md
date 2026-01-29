@@ -47,7 +47,7 @@ The framework was evaluated on three major datasets under high acceleration rati
 
 ### Loss Function
 The network is trained using a composite loss function:
-$$\mathcal{L}(\Theta) = \mathcal{L}_{consistency} + \alpha\mathcal{L}_{constraint} + \beta\mathcal{L}_{anatomy} + \gamma\mathcal{L}_{dice}$$
+$\mathcal{L}(\Theta)=\mathcal{L}_{consistency} + \alpha\mathcal{L}_{constraint} + \beta\mathcal{L}_{anatomy} + \gamma\mathcal{L}_{dice}$
 * **$\mathcal{L}_{consistency}$**: Global fidelity between output and ground-truth.
 * **$\mathcal{L}_{anatomy}$**: Refinement emphasizing fidelity within specified TOIs.
 * **$\mathcal{L}_{dice}$**: Promotes accurate segmentation of TOIs in reconstructed images.
