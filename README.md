@@ -61,11 +61,10 @@ The framework was evaluated on three major datasets under high acceleration rati
 * **Stages ($T$)**: 6
 ### 🛠 How to Train
 To train the model from scratch using the default settings on the M4Raw dataset:
-```bash
-python A2_MC_MR_M4Raw.py
+* python A2_MC_MR_M4Raw.py
 ### 🧪 How to Test
 To evaluate a pre-trained model and generate reconstruction results:
-python test_A2_MC_MR_M4Raw.py
+* python test_A2_MC_MR_M4Raw.py
 
 ## 🔗 Citation
 If you use this code or method in your research, please cite the following paper:
