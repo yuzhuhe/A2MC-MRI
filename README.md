@@ -28,7 +28,7 @@ The A²MC-MRI network consists of cascaded stages, each containing three pivotal
 * **`A2_MC_MR_M4Raw.py`**: Main model implementation for A²MC-MRI.
 * **`test_A2_MC_MR_M4Raw.py`**: Script for model evaluation and testing.
 * **`Denoising.py`**: Implementation of the denoising module.
-* **`Unet_complex.py`**: Core U-Net architecture for segmentation net.
+* **`Unet_complex.py`**: Implementation of the P-net (segmentation network).
 * **`M4Raw_data_example/`**: Sample dataset for low-field brain MRI reconstruction.
 * **`Seg_model_M4Raw_whole/`**: Pre-trained segmentation model weights for anatomy-aware guidance.
 
