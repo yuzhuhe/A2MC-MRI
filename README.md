@@ -29,8 +29,6 @@ The A²MC-MRI network consists of cascaded stages, each containing three pivotal
 * **OS**: Ubuntu 20.04
 * **GPU**: NVIDIA RTX 3090Ti (or compatible)
 * **Environment**: Python 3.10+, PyTorch
-* **Key Libraries**: `monai`, `nibabel`, `numpy`, `scipy`, `einops`, `matplotlib`
-
 ---
 
 ## 🗂 Data Preparation
