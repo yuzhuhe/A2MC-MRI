@@ -20,7 +20,7 @@ The A²MC-MRI network consists of cascaded stages, each containing three pivotal
 2. **Anatomy-Aware Data-Consistency Module ($A^2\mathcal{DC}$)**: Incorporates the P-net to localize TOIs and applies refined constraints to enhance imaging quality in clinically relevant areas.
 3. **Group Sparsity Module (GS)**: Enhances cross-contrast complementarity by capturing joint sparsity features in the informative semantic space.
 
-![A2MC-MRI Architecture](assets/framework.pdf)
+![A2MC-MRI Architecture](assets/framework.png)
 
 ---
 
